@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTC Institutional Gateway | Secure Collateral Escrow</title>
-    <!-- Tailwind CSS untuk Desain Responsif & Modern -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Font Premium dari Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome untuk Ikon -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0B0C10;
+            background-color: #06070a;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
         }
         .luxury-title {
             font-family: 'Cinzel', serif;
@@ -24,150 +37,214 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .gold-border {
-            border-image: linear-gradient(to right, #BF953F, #AA771C) 1;
-        }
         .glass-card {
-            background: rgba(26, 29, 38, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(191, 149, 63, 0.15);
+            background: rgba(13, 17, 28, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 149, 63, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        /* Custom Scrollbar untuk Live Feed */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(191, 149, 63, 0.3);
+            border-radius: 2px;
         }
     </style>
 </head>
 <body class="text-gray-200 min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navigation -->
-    <header class="border-b border-gray-800 bg-[#11141C] px-6 py-4 md:px-12 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-shield-halved text-2xl text-[#BF953F]"></i>
-            <span class="luxury-title text-lg font-bold tracking-widest text-white">OVER-THE-COUNTER <span class="gold-gradient">PORTAL</span></span>
-        </div>
-        <div class="flex items-center space-x-4">
-            <span class="text-xs bg-emerald-950/80 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/30 flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> TRON Network Connected
-            </span>
-        </div>
-    </header>
+    <div id="particles-js"></div>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col items-center justify-center px-4 py-12 md:px-12">
-        <div class="max-w-5xl w-full space-y-8">
+    <div class="content-wrapper flex flex-col justify-between min-h-screen">
+        
+        <header class="border-b border-gray-900/80 bg-[#0b0e14]/80 backdrop-blur-md px-6 py-4 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shield-halved text-2xl text-[#BF953F]"></i>
+                <span class="luxury-title text-base md:text-lg font-bold tracking-widest text-white">OVER-THE-COUNTER <span class="gold-gradient">PORTAL</span></span>
+            </div>
             
-            <!-- Hero Announcement -->
-            <div class="text-center space-y-3">
-                <p class="text-[#BF953F] text-xs uppercase tracking-[0.3em] font-semibold">Institutional Escrow Agreement</p>
-                <h1 class="luxury-title text-3xl md:text-5xl font-bold tracking-wide text-white">
-                    Secure Collateral Management
-                </h1>
-                <p class="text-gray-400 text-sm max-w-2xl mx-auto">
-                    Platform kliring aset digital terenkripsi untuk transaksi volume tinggi. Menjamin keamanan eksekusi kolateral multipihak berbasis otomasi Smart Contract TRC-20.
-                </p>
+            <div class="flex items-center space-x-6 bg-gray-900/40 px-4 py-2 rounded-lg border border-gray-800/60 text-xs font-mono">
+                <div class="text-center md:text-left">
+                    <span class="text-gray-500 block text-[10px] uppercase">Singapore (Asia)</span>
+                    <span id="time-sg" class="text-gray-300 font-semibold">00:00:00</span>
+                </div>
+                <div class="h-6 w-[1px] bg-gray-800"></div>
+                <div class="text-center md:text-left">
+                    <span class="text-gray-500 block text-[10px] uppercase">London (Europe)</span>
+                    <span id="time-lon" class="text-gray-300 font-semibold">00:00:00</span>
+                </div>
+                <div class="h-6 w-[1px] bg-gray-800"></div>
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-emerald-400 text-[11px]">TRON Live</span>
+                </div>
             </div>
+        </header>
 
-            <!-- Dashboard Kolateral & Multi-Sig Status -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <main class="flex-grow flex flex-col items-center justify-center px-4 py-10 md:px-12">
+            <div class="max-w-6xl w-full space-y-6">
                 
-                <!-- Card 1: Detail Likuiditas Terkunci -->
-                <div class="glass-card p-6 rounded-xl md:col-span-2 flex flex-col justify-between space-y-6">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Collateral Value</span>
-                            <span class="text-xs font-mono text-[#BF953F] px-2 py-0.5 bg-[#BF953F]/10 rounded border border-[#BF953F]/20">Active Pool</span>
-                        </div>
-                        <div class="mt-4 flex items-baseline space-x-2">
-                            <span class="luxury-title text-4xl md:text-5xl font-bold text-white tracking-tight">2,300,000,000</span>
-                            <span class="text-xl font-bold text-emerald-400">USDT</span>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-2 font-mono">Asset Type: Tether USD (TRC-20 Mainnet)</p>
-                    </div>
-
-                    <div class="border-t border-gray-800/80 pt-4 space-y-3 text-xs font-mono">
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Smart Contract:</span>
-                            <a href="#" class="text-[#BF953F] hover:underline">TWe1r...7x9P (Verifying)</a>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-400">Client Recipient:</span>
-                            <span class="text-gray-300">Registered Vault Address</span>
-                        </div>
-                    </div>
+                <div class="text-center space-y-2">
+                    <p class="text-[#BF953F] text-xs uppercase tracking-[0.3em] font-semibold">Institutional Escrow Agreement</p>
+                    <h1 class="luxury-title text-3xl md:text-4xl font-bold tracking-wide text-white">Secure Collateral Management</h1>
                 </div>
 
-                <!-- Card 2: Status Multi-Signature Indicator -->
-                <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 block mb-4">Multi-Sig Consensus</span>
-                        
-                        <!-- Timeline Status Pihak -->
-                        <div class="space-y-4">
-                            <!-- Provider Status -->
-                            <div class="flex items-center justify-between p-2.5 bg-gray-900/40 rounded border border-gray-800">
-                                <div class="flex items-center space-x-2.5">
-                                    <i class="fa-solid fa-key text-xs text-emerald-400"></i>
-                                    <span class="text-xs font-medium">Provider Admin</span>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="glass-card p-6 rounded-xl flex flex-col justify-between space-y-6">
+                            <div>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Collateral Value</span>
+                                    <span class="text-[10px] font-mono text-[#BF953F] px-2 py-0.5 bg-[#BF953F]/10 rounded border border-[#BF953F]/20">Active Secured Pool</span>
                                 </div>
-                                <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-mono">APPROVED</span>
+                                <div class="mt-4 flex items-baseline space-x-2">
+                                    <span class="luxury-title text-4xl md:text-5xl font-bold text-white tracking-tight">2,300,000,000</span>
+                                    <span class="text-xl font-bold text-emerald-400">USDT</span>
+                                </div>
                             </div>
-
-                            <!-- Escrow Agent Status -->
-                            <div class="flex items-center justify-between p-2.5 bg-gray-900/40 rounded border border-gray-800">
-                                <div class="flex items-center space-x-2.5">
-                                    <i class="fa-solid fa-gavel text-xs text-amber-400 animate-pulse"></i>
-                                    <span class="text-xs font-medium">Escrow Agent</span>
+                            <div class="border-t border-gray-800/80 pt-4 grid grid-cols-2 gap-4 text-xs font-mono">
+                                <div>
+                                    <span class="text-gray-500 block text-[10px]">ESCROW AGENT CONTRACT</span>
+                                    <a href="#" class="text-[#BF953F] hover:underline">TWe1r89x...7x9P0xL</a>
                                 </div>
-                                <span class="text-[10px] bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20 font-mono">PENDING</span>
+                                <div>
+                                    <span class="text-gray-500 block text-[10px]">CLIENT COLLATERAL VAULT</span>
+                                    <span class="text-gray-300">TR7NHqje...SgGjLj6t</span>
+                                </div>
                             </div>
+                        </div>
 
-                            <!-- Client Status -->
-                            <div class="flex items-center justify-between p-2.5 bg-gray-900/40 rounded border border-gray-800">
-                                <div class="flex items-center space-x-2.5">
-                                    <i class="fa-solid fa-user-shield text-xs text-gray-500"></i>
-                                    <span class="text-xs font-medium">Client Admin</span>
-                                </div>
-                                <span class="text-[10px] bg-gray-800 text-gray-400 px-2 py-0.5 rounded font-mono">AWAITING</span>
+                        <div class="glass-card p-6 rounded-xl space-y-4">
+                            <div class="flex items-center space-x-3 border-b border-gray-800/60 pb-3">
+                                <i class="fa-solid fa-terminal text-[#BF953F] text-xs"></i>
+                                <h2 class="text-xs font-semibold tracking-wider uppercase text-gray-400">Institutional Execution Control</h2>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <button class="bg-gradient-to-r from-[#BF953F] to-[#AA771C] hover:brightness-110 text-black font-semibold text-xs uppercase tracking-widest py-3.5 rounded transition duration-300 shadow-lg cursor-pointer">
+                                    <i class="fa-solid fa-pen-fancy mr-2"></i> Sign & Approve Contract
+                                </button>
+                                <button class="bg-gray-900 border border-gray-800 text-gray-500 font-semibold text-xs uppercase tracking-widest py-3.5 rounded transition duration-300 cursor-not-allowed">
+                                    <i class="fa-solid fa-bolt mr-2"></i> Execute Asset Release
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-[11px] text-gray-500 text-center italic mt-4">
-                        *Required 2 of 3 signatures to execute asset transfer.
+                    <div class="space-y-6">
+                        <div class="glass-card p-5 rounded-xl space-y-4">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 block">Consensus Status</span>
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex items-center justify-between p-2 bg-gray-900/40 rounded border border-gray-800/60">
+                                    <span class="font-mono text-gray-300">Provider Keys</span>
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20 font-mono">SIGNED</span>
+                                </div>
+                                <div class="flex items-center justify-between p-2 bg-gray-900/40 rounded border border-gray-800/60">
+                                    <span class="font-mono text-gray-300">Escrow Agent</span>
+                                    <span class="text-[10px] bg-amber-950 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20 font-mono animate-pulse">AWAITING</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-5 rounded-xl flex flex-col h-[210px]">
+                            <div class="flex justify-between items-center border-b border-gray-800/60 pb-2 mb-3">
+                                <span class="text-xs font-semibold uppercase tracking-wider text-gray-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-chart-line text-emerald-400"></i> TronScan Live (>10k)
+                                </span>
+                                <span class="text-[9px] text-gray-500 font-mono">USDT Mainnet</span>
+                            </div>
+                            <div id="tx-feed" class="flex-grow overflow-y-auto space-y-2 custom-scroll pr-1">
+                                </div>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
+        </main>
 
-            <!-- Kotak Interaksi Utama Kontrak -->
-            <div class="glass-card p-8 rounded-xl space-y-6">
-                <div class="flex items-center space-x-3 border-b border-gray-800 pb-4">
-                    <i class="fa-solid fa-terminal text-[#BF953F]"></i>
-                    <h2 class="text-sm font-semibold tracking-wider uppercase">Institutional Execution Control</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Tombol Approve Syarat Kontrak -->
-                    <button class="w-full bg-gradient-to-r from-[#BF953F] to-[#AA771C] hover:from-[#AA771C] hover:to-[#BF953F] text-black font-semibold text-xs uppercase tracking-widest py-4 rounded transition duration-300 shadow-lg cursor-pointer">
-                        <i class="fa-solid fa-pen-fancy mr-2"></i> Sign & Approve Contract
-                    </button>
-                    <!-- Tombol Execute (Hanya aktif jika konsensus terpenuhi) -->
-                    <button class="w-full bg-gray-900 border border-gray-800 hover:border-gray-700 text-gray-400 hover:text-white font-semibold text-xs uppercase tracking-widest py-4 rounded transition duration-300 cursor-pointer">
-                        <i class="fa-solid fa-bolt mr-2"></i> Execute Asset Release
-                    </button>
-                </div>
+        <footer class="border-t border-gray-950 bg-[#040508] px-6 py-4 text-center md:flex md:justify-between md:items-center md:px-12 text-xs text-gray-600">
+            <div>&copy; 2026 OTC Escrow Gateway. Security Protocols Enforced.</div>
+            <div class="mt-2 md:mt-0 flex justify-center space-x-6 font-mono text-[11px]">
+                <span><i class="fa-solid fa-circle-check text-emerald-600"></i> TLS 1.3 Encryption</span>
+                <span><i class="fa-solid fa-circle-check text-emerald-600"></i> Smart Contract Validated</span>
             </div>
+        </footer>
+    </div>
 
-        </div>
-    </main>
+    <script>
+        // 1. Fungsi Jam Dunia Real-time (Singapore & London)
+        function updateWorldClocks() {
+            const optionsSG = { timeZone: 'Asia/Singapore', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const optionsLON = { timeZone: 'Europe/London', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            
+            document.getElementById('time-sg').textContent = new Date().toLocaleTimeString('en-US', optionsSG);
+            document.getElementById('time-lon').textContent = new Date().toLocaleTimeString('en-US', optionsLON);
+        }
+        setInterval(updateWorldClocks, 1000);
+        updateWorldClocks();
 
-    <!-- Footer -->
-    <footer class="border-t border-gray-900 bg-[#08090D] px-6 py-6 text-center md:flex md:justify-between md:items-center md:px-12 text-xs text-gray-500">
-        <div>
-            &copy; 2026 OTC Escrow Gateway. Handshake Verification Protocol Active.
-        </div>
-        <div class="mt-2 md:mt-0 flex justify-center space-x-6 font-mono text-[11px]">
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500"></i> TLS 1.3 Encryption</span>
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500"></i> Smart Contract Validated</span>
-        </div>
-    </footer>
+        // 2. Generator Simulasi Live Transaksi TronScan > 10K USDT
+        const txFeed = document.getElementById('tx-feed');
+        function generateRandomTx() {
+            const hexChars = '0123456789abcdef';
+            let mockHash = 'f';
+            for (let i = 0; i < 7; i++) mockHash += hexChars[Math.floor(Math.random() * 16)];
+            
+            // Generate nilai random bernilai besar antara 10,500 - 850,000 USDT
+            const amount = Math.floor(Math.random() * (850000 - 10500 + 1) + 10500).toLocaleString('en-US');
+            
+            const txItem = document.createElement('div');
+            txItem.className = "flex justify-between items-center text-[11px] font-mono p-2 bg-gray-900/30 rounded border border-gray-800/40 opacity-0 transform translate-y-2 transition duration-500";
+            txItem.innerHTML = `
+                <div class="flex items-center space-x-1.5">
+                    <i class="fa-solid fa-arrow-right-arrow-left text-gray-600 text-[9px]"></i>
+                    <a href="#" class="text-blue-400 hover:underline">${mockHash}...tx</a>
+                </div>
+                <span class="text-emerald-400 font-semibold">+${amount} USDT</span>
+            `;
+            
+            txFeed.insertBefore(txItem, txFeed.firstChild);
+            
+            // Efek Animasi Fade-In
+            setTimeout(() => {
+                txItem.classList.remove('opacity-0', 'translate-y-2');
+            }, 50);
 
+            // Batasi tumpukan log agar tidak terlalu panjang
+            if (txFeed.children.length > 15) {
+                txFeed.removeChild(txFeed.lastChild);
+            }
+        }
+        
+        // Loop Transaksi Baru Masuk Setiap 3 sampai 6 detik
+        function loopTx() {
+            generateRandomTx();
+            setTimeout(loopTx, Math.random() * (6000 - 3000) + 3000);
+        }
+        // Prefill Data Awal
+        for(let i=0; i<4; i++) generateRandomTx();
+        loopTx();
+
+        // 3. Inisialisasi Background Futuristik (Particles.js)
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 45, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#BF953F" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#BF953F", "opacity": 0.08, "width": 1 },
+                "move": { "enable": true, "speed": 0.6, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false } } },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
